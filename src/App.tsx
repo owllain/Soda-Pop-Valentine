@@ -13,6 +13,13 @@ const App: React.FC = () => {
   const [screen, setScreen] = useState<AppScreen>('WELCOME');
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [isEvil, setIsEvil] = useState(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(true);
+
+  const handleStart = () => {
+    setScreen('MEMORIES');
+    // Aseguramos que se intente reproducir de nuevo al interactuar
+    setIsMusicPlaying(true);
+  };
 
   return (
     <div className={`max-w-md mx-auto h-screen relative flex flex-col overflow-hidden transition-colors duration-700 ${isEvil ? 'evil-theme bg-pop-dark' : 'bg-pop-purple/10'}`}>
@@ -38,7 +45,7 @@ const App: React.FC = () => {
         <span className="material-symbols-outlined text-3xl drop-shadow-md">
           {isPlayerOpen ? 'close' : 'music_note'}
         </span>
-        {!isPlayerOpen && (
+        {(!isPlayerOpen && isMusicPlaying) && (
           <motion.div 
             animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }} 
             transition={{ repeat: Infinity, duration: 1.5 }}
@@ -78,7 +85,7 @@ const App: React.FC = () => {
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="h-full w-full"
           >
-            {screen === 'WELCOME' && <WelcomeScreen onStart={() => setScreen('MEMORIES')} />}
+            {screen === 'WELCOME' && <WelcomeScreen onStart={handleStart} />}
             {screen === 'MEMORIES' && <MemorySlideshow onContinue={() => setScreen('PROPOSAL')} />}
             {screen === 'PROPOSAL' && <ProposalScreen onAccept={() => setScreen('SUCCESS')} onBack={() => setScreen('WELCOME')} />}
             {screen === 'SUCCESS' && <SuccessScreen />}
@@ -86,7 +93,12 @@ const App: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      <CassettePlayer isOpen={isPlayerOpen} isEvil={isEvil} />
+      <CassettePlayer 
+        isOpen={isPlayerOpen} 
+        isEvil={isEvil} 
+        isPlaying={isMusicPlaying}
+        setIsPlaying={setIsMusicPlaying}
+      />
       
       {/* Dynamic Grid Pattern Background Layer */}
       <div className="fixed inset-0 pointer-events-none opacity-10 z-0" 

@@ -6,11 +6,17 @@ import config from '../data/config.json';
 interface CassettePlayerProps {
     isOpen?: boolean;
     isEvil?: boolean;
+    isPlaying: boolean;
+    setIsPlaying: (playing: boolean) => void;
 }
 
-export const CassettePlayer: React.FC<CassettePlayerProps> = ({ isOpen = true, isEvil = false }) => {
+export const CassettePlayer: React.FC<CassettePlayerProps> = ({ 
+    isOpen = true, 
+    isEvil = false,
+    isPlaying,
+    setIsPlaying
+}) => {
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
     const tracks = config.assets.tracks;
 
@@ -63,19 +69,15 @@ export const CassettePlayer: React.FC<CassettePlayerProps> = ({ isOpen = true, i
         return () => audio.removeEventListener('ended', handleEnded);
     }, [currentTrackIndex]);
 
-    // Autoplay optimizado para Soda Pop al cargar
+    // El efecto de "autoplay" ahora es controlado por la prop isPlaying
     useEffect(() => {
-        if (audioRef.current) {
-            const timer = setTimeout(() => {
-                audioRef.current?.play()
-                    .then(() => setIsPlaying(true))
-                    .catch(() => {
-                        console.log("Autoplay blocked. User interaction required.");
-                    });
-            }, 1000);
-            return () => clearTimeout(timer);
+        if (audioRef.current && isPlaying) {
+            audioRef.current.play().catch(err => {
+                console.log("Play failed, resetting state:", err);
+                setIsPlaying(false);
+            });
         }
-    }, []);
+    }, [isPlaying]);
 
     const currentTrack = tracks[currentTrackIndex];
 
