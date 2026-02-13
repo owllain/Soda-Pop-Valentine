@@ -44,7 +44,8 @@ const ProposalScreen: React.FC<ProposalScreenProps> = ({ onAccept, onBack }) => 
   };
 
   return (
-    <div className="h-full flex flex-col items-center justify-center px-4 pt-10 pb-8 animate-pop-in relative overflow-y-auto no-scrollbar">
+    <div className="h-full flex flex-col items-center justify-between px-4 animate-pop-in relative overflow-hidden" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      <div className="flex-1 w-full flex flex-col items-center justify-center py-8 min-h-0 overflow-y-auto no-scrollbar">
 
       {/* Decorative Sparkles (Image Copy 7) */}
       <img src="/-raw-images/-raw-icons/image%20copy%207.png" className="absolute top-20 left-4 w-8 h-8 object-contain animate-pulse z-0 opacity-60" alt="Sparkle" />
@@ -110,8 +111,10 @@ const ProposalScreen: React.FC<ProposalScreenProps> = ({ onAccept, onBack }) => 
         </div>
       </div>
 
+      </div>
+
       {/* Action Buttons */}
-      <div className="w-full max-w-sm mx-auto space-y-4 z-20 mt-auto">
+      <div className="w-full max-w-sm mx-auto space-y-4 z-20 pb-4 shrink-0">
         <button
           onClick={handleAccept}
           className="group relative w-full h-24 rounded-full border-8 border-white shadow-[0_10px_40px_-10px_rgba(255,105,180,0.6)] overflow-hidden transition-transform hover:scale-105 active:scale-95 active:shadow-sm"
@@ -219,7 +222,6 @@ const ProposalScreen: React.FC<ProposalScreenProps> = ({ onAccept, onBack }) => 
           </div>
         </div>
       )}
-
     </div>
   );
 };

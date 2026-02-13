@@ -27,7 +27,8 @@ const SuccessScreen: React.FC = () => {
     }, []);
 
     return (
-        <div className="h-full flex flex-col items-center justify-between p-6 pb-12 pt-12 relative overflow-hidden animate-pop-in no-scrollbar bg-gradient-to-b from-transparent via-white/20 to-transparent">
+        <div className="h-full flex flex-col items-center justify-between px-6 animate-pop-in relative overflow-hidden" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
+            <div className="flex-1 w-full flex flex-col items-center justify-center py-6 min-h-0 overflow-y-auto no-scrollbar">
             
             {/* Background Floating Elements */}
              <div className="absolute inset-0 pointer-events-none z-0">
@@ -75,6 +76,8 @@ const SuccessScreen: React.FC = () => {
                     {/* Washi Tape Decoration */}
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-pop-blue/50 backdrop-blur-sm rotate-[-2deg] shadow-sm"></div>
                 </div>
+
+            </div>
 
             </div>
 

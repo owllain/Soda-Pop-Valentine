@@ -34,13 +34,13 @@ const MemorySlideshow: React.FC<MemorySlideshowProps> = ({ onContinue }) => {
   };
 
   return (
-    <div className="h-full flex flex-col pt-12 animate-pop-in">
-      <div className="px-6 mb-2 flex flex-col items-center">
-        <h2 className="text-5xl font-soda text-white text-outline-blue drop-shadow-[0_4px_0_rgba(107,76,154,0.6)] leading-tight text-center transform -rotate-1">
+    <div className="h-full flex flex-col pt-safe-area animate-pop-in" style={{ paddingTop: 'calc(4rem + env(safe-area-inset-top))' }}>
+      <div className="px-6 mb-2 flex flex-col items-center shrink-0">
+        <h2 className="text-4xl sm:text-5xl font-soda text-white text-outline-blue drop-shadow-[0_4px_0_rgba(107,76,154,0.6)] leading-tight text-center transform -rotate-1">
           Our Memories
         </h2>
         <div className="bg-white/50 px-4 py-1.5 rounded-full mt-2 border border-white backdrop-blur-sm shadow-sm transform rotate-1">
-          <p className="text-xs text-pop-purple font-black tracking-[0.2em] uppercase">✨ FOREVER WITH YOU ✨</p>
+          <p className="text-[10px] sm:text-xs text-pop-purple font-black tracking-[0.2em] uppercase">✨ FOREVER WITH YOU ✨</p>
         </div>
       </div>
 
@@ -74,7 +74,7 @@ const MemorySlideshow: React.FC<MemorySlideshowProps> = ({ onContinue }) => {
             <div
               key={memory.id}
               onClick={() => setSelectedMemory(memory)}
-              className="snap-center shrink-0 w-[80vw] max-w-sm aspect-[3/4] relative group cursor-pointer active:scale-95 transition-transform"
+              className="snap-center shrink-0 w-[75vw] max-w-sm aspect-[3/4] sm:aspect-[4/5] relative group cursor-pointer active:scale-95 transition-transform"
             >
               {/* Decorative Buny Ears */}
               <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 flex gap-1 pointer-events-none">
@@ -139,7 +139,7 @@ const MemorySlideshow: React.FC<MemorySlideshowProps> = ({ onContinue }) => {
         </div>
       </div>
 
-      <div className="px-6 pb-12 mt-auto">
+      <div className="px-6 pb-safe-area mt-auto shrink-0" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
         <button
           onClick={onContinue}
           className="group relative w-full max-w-[400px] h-24 mx-auto mt-4 rounded-full border-8 border-white shadow-[0_10px_40px_-10px_rgba(255,183,213,0.8)] overflow-hidden transition-transform hover:scale-105 active:scale-95 active:shadow-sm"

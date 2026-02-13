@@ -22,7 +22,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`max-w-md mx-auto h-screen relative flex flex-col overflow-hidden transition-colors duration-700 ${isEvil ? 'evil-theme bg-pop-dark' : 'bg-pop-purple/10'}`}>
+    <div className={`max-w-md mx-auto safe-h-screen relative flex flex-col overflow-hidden transition-colors duration-700 padding-safe-area ${isEvil ? 'evil-theme bg-pop-dark' : 'bg-pop-purple/10'}`}>
       <FloatingElements />
 
       {/* Background Image Layer */}
@@ -39,7 +39,8 @@ const App: React.FC = () => {
       {/* Music Toggle Button */}
       <button 
         onClick={() => setIsPlayerOpen(!isPlayerOpen)}
-        className="fixed top-4 left-4 z-[10001] w-14 h-14 rounded-full holographic border-4 border-white shadow-xl flex items-center justify-center text-white active:scale-95 transition-transform group"
+        className="fixed top-safe-top left-4 z-[10001] w-14 h-14 rounded-full holographic border-4 border-white shadow-xl flex items-center justify-center text-white active:scale-95 transition-transform group"
+        style={{ top: 'calc(1rem + env(safe-area-inset-top))' }}
       >
         <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
         <span className="material-symbols-outlined text-3xl drop-shadow-md">
@@ -59,8 +60,9 @@ const App: React.FC = () => {
       {/* Evil Toggle Button */}
       <button 
         onClick={() => setIsEvil(!isEvil)}
-        className="fixed top-20 left-4 z-[10001] w-14 h-14 rounded-full holographic border-4 border-white shadow-xl flex items-center justify-center text-white transition-all duration-500 active:scale-95 group"
+        className="fixed left-4 z-[10001] w-14 h-14 rounded-full holographic border-4 border-white shadow-xl flex items-center justify-center text-white transition-all duration-500 active:scale-95 group"
         title={isEvil ? "Go Sweet" : "Go Evil"}
+        style={{ top: 'calc(5rem + env(safe-area-inset-top))' }}
       >
         <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
         <span className="material-symbols-outlined text-3xl drop-shadow-md relative z-10 text-white">
